@@ -1,22 +1,32 @@
-# Use the official Maven image to build the application
-FROM maven:3.8.6-openjdk-17 AS build
+# ----- ÉTAPE 1: Le "Build" -----
+# On utilise une image Maven officielle qui inclut Java 17
+# C'est notre "builder" (notre constructeur)
+FROM maven:3.9.6-eclipse-temurin-17-focal AS build
 
-# Set the working directory
+# On définit le dossier de travail dans le conteneur
 WORKDIR /app
 
-# Copy the pom.xml and download dependencies
+# On copie d'abord le pom.xml pour optimiser le cache Docker
 COPY pom.xml .
+
+# On copie le reste du code source
 COPY src ./src
+
+# On lance Maven pour packager l'application
+# -DskipTests est optionnel, mais ton job Jenkins a DÉJÀ lancé les tests,
+# pas besoin de les lancer une 2e fois ici.
 RUN mvn clean package -DskipTests
 
-# Use the official OpenJDK image to run the application
+
+# ----- ÉTAPE 2: L'image "Finale" -----
+# On part d'une image Java 17 toute légère, sans Maven
 FROM openjdk:17-jdk-slim
 
-# Set the working directory
 WORKDIR /app
 
-# Copy the built JAR file from the build stage
-COPY --from=build /app/target/*.jar app.jar
+# On copie SEULEMENT le .jar qui a été créé à l'étape "build"
+COPY --from=build /app/target/*.jar ./app.jar
 
-# Specify the command to run the application
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# C'est la commande qui sera lancée au démarrage du conteneur
+# (Ex: quand tu feras "docker run ...")
+CMD ["java", "-jar", "app.jar"]

@@ -17,10 +17,11 @@ pipeline {
             steps {
                 script {
                     echo 'I am building docker image'
-                    withCredentials([usernamePassword(credentialsId: 'docker-hub-repo', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
-                        sh "docker build -t abddesamdmhj/demo-app:jma-2.0 ."
-                        sh "echo ${PASS} | docker login -u ${USER} --password-stdin"
-                        sh "docker push abddesamdmhj/demo-app:jma-2.0"
+                    withCredentials([usernamePassword(credentialsId: 'acr-credentials', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+                        sh "docker build -t acrdevopsabdessamad.azurecr.io/my-java-app/$BUILD_NUMBER ."
+                        sh "echo ${PASS} | docker login -u ${USER} acrdevopsabdessamad.azurecr.io --password-stdin"
+                        sh "docker push acrdevopsabdessamad.azurecr.io/my-java-app/$BUILD_NUMBER"
+                        sh "docker logout acrdevopsabdessamad.azurecr.io"
                     }
                 }
             }

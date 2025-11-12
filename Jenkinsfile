@@ -43,18 +43,4 @@ pipeline {
         }
 
         
-<<<<<<< HEAD
-    }
-    post {
-        always {
-            echo 'This will always run after the stages finish'
-        }
-    }
-=======
-    }
-    post {
-        always {
-            echo 'This will always run after the stages finish'
-        }
-    }
->>>>>>> 395c2e339621738ab44b659c963e61ceea6491fd
+

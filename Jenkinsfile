@@ -2,16 +2,11 @@ pipeline {
     agent any
     tools  {
         maven 'maven-3.9'
-        
     }
 
     stages {
-        
-        // 3. This is the first stage
         stage('Build Jar') {
             steps {
-
-                
                 echo 'This is the Build stage!'
                 echo 'I am building...'
                 sh 'mvn package'
@@ -20,9 +15,7 @@ pipeline {
 
         stage('Build Image') {
             steps {
-
                 script {
-
                     echo 'I am building docker image'
                     withCredentials([usernamePassword(credentialsId: 'docker-hub-repo', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
                         sh "docker build -t abddesamdmhj/demo-app:jma-2.0 ."
@@ -35,12 +28,9 @@ pipeline {
 
         stage('Test') {
             steps {
-                // This is the work it does
                 echo 'This is the Test stage!'
-                }
-                
-            }
-        }
+            }   // ✅ fermeture de steps
+        }       // ✅ fermeture de stage
+    }           // ✅ fermeture de stages
 
-        
-
+}               // ✅ fermeture de pipeline

@@ -37,11 +37,14 @@ pipeline {
             steps {
                 // This is the work it does
                 echo 'This is the Test stage!'
-                }
-                
+                echo 'I am testing...'
             }
         }
 
         
     }
-}
+    post {
+        always {
+            echo 'This will always run after the stages finish'
+        }
+    }

@@ -20,7 +20,7 @@ RUN mvn clean package -DskipTests
 
 # ----- ÉTAPE 2: L'image "Finale" -----
 # On part d'une image Java 17 toute légère, sans Maven
-FROM openjdk:17-jdk-slim-bullseye
+FROM eclipse-temurin:17-jdk-jammy
 WORKDIR /app
 
 # On copie SEULEMENT le .jar qui a été créé à l'étape "build"

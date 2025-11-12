@@ -1,6 +1,6 @@
 pipeline {
     agent any
-    tools {
+    tools  {
         maven 'maven-3.9'
     }
 
@@ -29,8 +29,8 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'This is the Test stage!'
-                echo 'I am testing...'
-            }
-        }
-    }
-}
+            }   // ✅ fermeture de steps
+        }       // ✅ fermeture de stage
+    }           // ✅ fermeture de stages
+
+}               // ✅ fermeture de pipeline

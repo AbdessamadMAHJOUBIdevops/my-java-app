@@ -32,7 +32,7 @@ pipeline {
 
                 script {
 
-                    buildJar()
+                    utils.buildJar()
                 }
             }
            
@@ -44,7 +44,7 @@ pipeline {
             steps {
                 script {
                     
-                  buildImage('docker-hub-repo')
+                  utils.buildImage('docker-hub-repo')
 
                     }
                 }
@@ -54,7 +54,7 @@ pipeline {
         stage('Test') {
             steps {
                 script {
-                    test()
+                    utils.test()
                 }
             }   
         }       

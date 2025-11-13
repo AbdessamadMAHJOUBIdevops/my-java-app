@@ -54,7 +54,7 @@ pipeline {
         stage('Test') {
             steps {
                 script {
-                    test()
+                    utils.test()
                 }
             }   
         }       

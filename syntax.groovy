@@ -1,13 +1,13 @@
 
 def buildJar(){
 
-     steps {
+     
         echo 'This is the Build stage!'
         echo 'I am building...'
         sh 'mvn package'
 
 
-}
+
 
 }
 

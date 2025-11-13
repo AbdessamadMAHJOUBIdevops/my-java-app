@@ -44,7 +44,7 @@ pipeline {
             steps {
                 script {
                     
-                  utils.buildImage('docker-hub-repo')
+                  utils.buildImage('acr-credentials')
 
                     }
                 }

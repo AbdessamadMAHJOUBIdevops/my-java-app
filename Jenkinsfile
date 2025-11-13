@@ -1,3 +1,5 @@
+def utils
+
 pipeline {
     agent any
     tools  {
@@ -5,6 +7,25 @@ pipeline {
     }
 
     stages {
+
+        stage('init'){
+
+            steps {
+
+                script{
+
+                    utils = load 'synrax.groovy'
+                }
+            }
+
+            
+
+
+
+        }
+
+
+
         stage('Build Jar') {
 
             steps{

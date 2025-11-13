@@ -14,7 +14,7 @@ pipeline {
 
                 script{
 
-                    utils = load 'synrax.groovy'
+                    utils = load 'syntax.groovy'
                 }
             }
 
